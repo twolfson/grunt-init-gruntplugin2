@@ -31,11 +31,9 @@
   },
   "dependencies": {
     "grunt": "~0.3.12",
-    "rimraf": "~2.0.2"
+    "grunt-install-init": "~1.0.1"
   },
-  "devDependencies": {
-    "grunt": "~0.3.12"
-  },
+  "devDependencies": {},
   "keywords": [
     "gruntplugin"
   ]
