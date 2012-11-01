@@ -2,6 +2,8 @@
 
 Standard init:gruntplugin with better test functionality.
 
+Attribution to [grunt-less](https://github.com/jharding/grunt-less) for file structure.
+
 ## Getting Started
 Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-init-gruntplugin2`
 
@@ -24,5 +26,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2012 Todd Wolfson  
+Copyright (c) 2012 Todd Wolfson
 Licensed under the MIT license.
