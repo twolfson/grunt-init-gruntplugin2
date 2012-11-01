@@ -37,7 +37,10 @@ module.exports = function(grunt) {
   // Load grunt-install-init
   grunt.loadNpmTasks('grunt-install-init');
 
-  // Default task.
-  grunt.registerTask('default', 'lint test');
+  // By default, install the init
+  grunt.registerTask('default', 'install-init');
+
+  // Development task
+  grunt.registerTask('dev', 'lint test');
 
 };
