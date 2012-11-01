@@ -9,7 +9,7 @@ module.exports = function (grunt) {
       }
     },
     test: {
-      all: '*.test.js'
+      all: '*_test.js'
     }
   });
 

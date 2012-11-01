@@ -25,7 +25,7 @@ exports['{%= short_name %}'] = {
     // setup here
     done();
   },
-  'helper': function(test) {
+  'multiTask': function(test) {
     test.expect(1);
     // tests here
     var expectedContent = grunt.file.read('expected/file.js'),
