@@ -28,7 +28,9 @@ exports['{%= short_name %}'] = {
   'helper': function(test) {
     test.expect(1);
     // tests here
-    test.equal(grunt.helper('{%= short_name %}'), '{%= short_name %}!!!', 'should return the correct value.');
+    var expectedContent = grunt.file.read('expected/file.js'),
+        actualContent = grunt.file.read('actual/file.js');
+    test.equal(actualContent, expectedContent, 'should return the correct value.');
     test.done();
   }
 };

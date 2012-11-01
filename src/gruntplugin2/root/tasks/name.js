@@ -15,16 +15,35 @@ module.exports = function(grunt) {
   // TASKS
   // ==========================================================================
 
-  grunt.registerTask('{%= short_name %}', 'Your task description goes here.', function() {
-    grunt.log.write(grunt.helper('{%= short_name %}'));
+  grunt.registerMultiTask('{%= short_name %}', 'Your task description goes here.', function() {
+    // Collect the filepaths we need
+    var file = this.file,
+        data = this.data,
+        src = file.src,
+        srcFiles = grunt.file.expand(src),
+        dest = file.dest;
+
+    // Concatenate the srcFiles, process the blob through our helper,
+    var separator = data.separator || '\n',
+        srcBlob = grunt.helper('concat', srcFiles, {separator: separator});
+        content = grunt.helper('{%= short_name %}', srcBlob);
+
+    // Write out the content
+    grunt.file.write(dest, content);
+
+    // Fail task if errors were logged.
+    if (this.errorCount) { return false; }
+
+    // Otherwise, print a success message.
+    grunt.log.writeln('File "' + this.file.dest + '" created.');
   });
 
   // ==========================================================================
   // HELPERS
   // ==========================================================================
 
-  grunt.registerHelper('{%= short_name %}', function() {
-    return '{%= short_name %}!!!';
+  grunt.registerHelper('{%= short_name %}', function (content) {
+    return content;
   });
 
 };
