@@ -38,26 +38,34 @@ module.exports = function(grunt) {
 
   // Create a helper to copy files from src to ~/.grunt/tasks/init/
   // TODO: This should be its own repo as well
-  var platform = process.platform;
-  console.log(platform);
+  var path = require('path'),
+      rimraf = require('rimraf');
   grunt.registerMultiTask('install', 'Helper to copy files to ~/.grunt', function () {
     // TODO: Windows support
     var file = this.file,
         src = file.src,
-        dest = '~/.grunt/tasks/init/';
+        dest = grunt.file.userDir('tasks/init');
 
     // Grab the srcDirs and srcFiles
     var srcDirs = grunt.file.expandDirs(src),
         srcFiles = grunt.file.expandFiles(src);
 
-    // Delete and re-create each of the srcDirs
+    // Empty each of the srcDirs
     srcDirs.forEach(function (srcDir) {
-      grunt.file.write(srcDir);
+      var destDir = path.join(dest, srcDir);
+      rimraf.sync(destDir);
+    });
+
+    // Re-create each of the srcDirs
+    srcDirs.forEach(function (srcDir) {
+      var destDir = path.join(dest, srcDir);
+      grunt.file.mkdir(destDir);
     });
 
     // Copy over each of the srcFiles
     srcFiles.forEach(function (srcFile) {
-      grunt.file.write(srcFile);
+      var destFile = path.join(dest, srcFile);
+      grunt.file.write(destFile);
     });
   });
 
