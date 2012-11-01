@@ -41,9 +41,9 @@ module.exports = function(grunt) {
   var path = require('path'),
       rimraf = require('rimraf');
   grunt.registerMultiTask('install', 'Helper to copy files to ~/.grunt', function () {
-    // TODO: Windows support
     var file = this.file,
-        src = file.src,
+        rawSrc = file.src,
+        src = rawSrc + '/**',
         dest = grunt.file.userDir('tasks/init');
 
     // Grab the srcDirs and srcFiles
@@ -52,20 +52,32 @@ module.exports = function(grunt) {
 
     // Empty each of the srcDirs
     srcDirs.forEach(function (srcDir) {
+      // Remove rawSrc from srcDir
+      srcDir = srcDir.replace(rawSrc, '');
+
+      // Empty the directory
       var destDir = path.join(dest, srcDir);
       rimraf.sync(destDir);
     });
 
     // Re-create each of the srcDirs
     srcDirs.forEach(function (srcDir) {
+      // Remove rawSrc from srcDir
+      srcDir = srcDir.replace(rawSrc, '');
+
+      // Re-creaate the directory
       var destDir = path.join(dest, srcDir);
       grunt.file.mkdir(destDir);
     });
 
     // Copy over each of the srcFiles
     srcFiles.forEach(function (srcFile) {
-      var destFile = path.join(dest, srcFile);
-      grunt.file.write(destFile);
+      // Remove rawSrc from srcFile
+      var _srcFile = srcFile.replace(rawSrc, '');
+
+      // Re-create the directory
+      var destFile = path.join(dest, _srcFile);
+      grunt.file.copy(srcFile, destFile);
     });
   });
 
