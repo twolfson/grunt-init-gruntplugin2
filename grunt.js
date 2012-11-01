@@ -30,9 +30,8 @@ module.exports = function(grunt) {
       globals: {}
     },
     install: {
-      gruntplugin2: {
-        'src': 'src'
-      }
+      // 'pluginname': 'base directory'
+      'gruntplugin2': 'src'
     }
   });
 
@@ -42,18 +41,23 @@ module.exports = function(grunt) {
       rimraf = require('rimraf');
   grunt.registerMultiTask('install', 'Helper to copy files to ~/.grunt', function () {
     var file = this.file,
-        rawSrc = file.src,
-        src = rawSrc + '/**',
+        baseDir = file.src,
+        pluginName = file.dest,
+        srcJS = baseDir + '/' + pluginName + '.js',
+        src = baseDir + '/' + pluginName + '/**',
         dest = grunt.file.userDir('tasks/init');
 
     // Grab the srcDirs and srcFiles
     var srcDirs = grunt.file.expandDirs(src),
         srcFiles = grunt.file.expandFiles(src);
 
+    // Add srcJS to the head of the srcFiles
+    srcFiles.unshift(srcJS);
+
     // Empty each of the srcDirs
     srcDirs.forEach(function (srcDir) {
-      // Remove rawSrc from srcDir
-      srcDir = srcDir.replace(rawSrc, '');
+      // Remove baseDir from srcDir
+      srcDir = srcDir.replace(baseDir, '');
 
       // Empty the directory
       var destDir = path.join(dest, srcDir);
@@ -62,8 +66,8 @@ module.exports = function(grunt) {
 
     // Re-create each of the srcDirs
     srcDirs.forEach(function (srcDir) {
-      // Remove rawSrc from srcDir
-      srcDir = srcDir.replace(rawSrc, '');
+      // Remove baseDir from srcDir
+      srcDir = srcDir.replace(baseDir, '');
 
       // Re-creaate the directory
       var destDir = path.join(dest, srcDir);
@@ -72,10 +76,10 @@ module.exports = function(grunt) {
 
     // Copy over each of the srcFiles
     srcFiles.forEach(function (srcFile) {
-      // Remove rawSrc from srcFile
-      var _srcFile = srcFile.replace(rawSrc, '');
+      // Remove baseDir from srcFile
+      var _srcFile = srcFile.replace(baseDir, '');
 
-      // Re-create the directory
+      // Copy over the file
       var destFile = path.join(dest, _srcFile);
       grunt.file.copy(srcFile, destFile);
     });
