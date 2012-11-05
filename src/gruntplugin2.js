@@ -20,6 +20,12 @@ exports.warnOn = '*';
 // The actual init template.
 exports.template = function(grunt, init, done) {
 
+  // Add on a keywords prompt
+  grunt.helper('prompt_for_obj').keywords = {
+    message: 'What keywords relate to this plugin (comma separated)?',
+    'default': 'gruntplugin'
+  };
+
   grunt.helper('prompt', {type: 'grunt'}, [
     // Prompt for these values.
     grunt.helper('prompt_for', 'name', function(value, data, done) {
@@ -39,13 +45,23 @@ exports.template = function(grunt, init, done) {
     grunt.helper('prompt_for', 'author_email'),
     grunt.helper('prompt_for', 'author_url'),
     grunt.helper('prompt_for', 'grunt_version'),
-    grunt.helper('prompt_for', 'node_version', '*')
+    grunt.helper('prompt_for', 'node_version', '*'),
+    grunt.helper('prompt_for', 'keywords')
   ], function(err, props) {
     // Set a few grunt-plugin-specific properties.
     props.main = 'grunt.js';
     props.npm_test = 'grunt --base ./test/ --config ./test/grunt.js';
     props.bin = 'bin/' + props.name;
-    props.keywords = ['gruntplugin'];
+
+    // Break up the keywords by commas
+    var keywords = props.keywords;
+    keywords = keywords.split(',');
+
+    // Trim each keyword and save
+    keywords = keywords.map(function (str) {
+      return str.trim();
+    });
+    props.keywords = keywords;
 
     // Files to copy (and process).
     var files = init.filesToCopy(props);
