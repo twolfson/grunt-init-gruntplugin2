@@ -5,18 +5,24 @@ Standard init:gruntplugin with better test functionality.
 Attribution to [grunt-less](https://github.com/jharding/grunt-less) for file structure.
 
 ## Getting Started
-Clone the repository, enter the directory, and run `grunt` to install `grunt-init-gruntplugin2`.
+Install `grunt-init-gruntplugin2` globally and call it from the shell
 ```shell
-git clone git://github.com/twolfson/grunt-init-gruntplugin2.git
-cd grunt-init-gruntplugin2
-grunt
+sudo npm install -g grunt-init-gruntplugin2
+grunt-init-gruntplugin2
 ```
 
 The `gruntplugin2` template should be added to your grunt userDir (`~/.grunt` for Linux or `%USERPROFILE%` for Windows).
 
 You can now call `grunt init:gruntplugin2` and the init prompt will start.
 
-***It is planned that this repository should be installed globally and run from the CLI.***
+Manual Install
+--------------
+Clone the repository, enter the directory, and run `grunt` to install `grunt-init-gruntplugin2`.
+```shell
+git clone git://github.com/twolfson/grunt-init-gruntplugin2.git
+cd grunt-init-gruntplugin2
+grunt
+```
 
 [grunt]: http://gruntjs.com/
 [getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
