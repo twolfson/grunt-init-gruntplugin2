@@ -15,8 +15,7 @@ The `gruntplugin2` template should be added to your grunt userDir (`~/.grunt` fo
 
 You can now call `grunt init:gruntplugin2` and the init prompt will start.
 
-Manual Install
---------------
+### Manual Install
 Clone the repository, enter the directory, and run `grunt` to install `grunt-init-gruntplugin2`.
 ```shell
 git clone git://github.com/twolfson/grunt-init-gruntplugin2.git
