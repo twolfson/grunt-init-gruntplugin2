@@ -49,9 +49,19 @@ exports.template = function(grunt, init, done) {
     grunt.helper('prompt_for', 'keywords')
   ], function(err, props) {
     // Set a few grunt-plugin-specific properties.
-    props.main = 'grunt.js';
-    props.npm_test = 'grunt --base ./test/ --config ./test/grunt.js';
+    props.main = 'tasks/' + props.name + '.js';
+    props.npm_test = 'cd test && grunt';
     props.bin = 'bin/' + props.name;
+    props.dependencies = {
+      "grunt-retro": "~0.4.0"
+    };
+    props._devDependencies = {
+      "grunt": "~0.3.17"
+    };
+    props.devDependencies = {
+      "grunt": "~0.4.0",
+      "grunt-contrib-nodeunit": "~0.1.2"
+    };
 
     // Break up the keywords by commas
     var keywords = props.keywords;
