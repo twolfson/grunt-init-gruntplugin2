@@ -1,4 +1,4 @@
-# grunt-init-gruntplugin2
+# grunt-init-gruntplugin2 [![Donate on Gittip](http://badgr.co/gittip/twolfson.png)](https://www.gittip.com/twolfson/)
 
 Standard init:gruntplugin with better test functionality.
 

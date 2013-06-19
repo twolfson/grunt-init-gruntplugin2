@@ -1,7 +1,7 @@
 {
   "name": "grunt-init-gruntplugin2",
   "description": "Standard init:gruntplugin with better test functionality.",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "homepage": "https://github.com/twolfson/grunt-init-gruntplugin2",
   "author": {
     "name": "Todd Wolfson",
